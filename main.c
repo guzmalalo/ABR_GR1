@@ -14,7 +14,7 @@ typedef struct N
 
     // Lien d'hierarchie
     struct N *sag; // Noued à gauche
-    struct N *sad; // Noued à droit
+    struct N *sad; // Noued à droite
 
 } Node ;
 
@@ -29,7 +29,7 @@ void creerNoued(Node **arbre_n, int n, char *str)
     (*arbre_n)->n = n;
     strcpy((*arbre_n)->nom, str);
 
-    // Initialisation des noueds fils
+    // Initialisation des noueds enfants
     (*arbre_n)->sad = NULL;
     (*arbre_n)->sag = NULL;
 
@@ -97,6 +97,28 @@ void affichePostfixe(Node * arbre){
         affichePostfixe(arbre->sad);
         printf("%d\t", arbre->n );
     }
+}
+
+Node * trouveNode(Node *arbre, int n){
+    if (arbre == NULL)
+    {
+        printf("Valeur non trouvée \n");
+        return NULL;
+    }
+    if (arbre->n == n)
+    {
+        printf("Valeur trouvé \n");
+        return arbre;
+    }else if (n < arbre->n)
+    {
+        // cherche a gauche
+        return trouveNode(arbre->sag, n);
+    }else if (n > arbre->n)
+    {
+        // cherche à droite
+        return trouveNode(arbre->sad, n);
+    }
+
 }
 
 
