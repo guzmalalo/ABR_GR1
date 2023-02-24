@@ -81,6 +81,23 @@ void afficheInfixe(Node * arbre){
     afficheInfixe(arbre->sad);
 }
 
+void affichePrefixe(Node * arbre){
+
+    if(arbre != NULL){
+        printf("%d\t", arbre->n );
+        affichePrefixe(arbre->sag);
+        affichePrefixe(arbre->sad);
+    }
+}
+
+void affichePostfixe(Node * arbre){
+
+    if(arbre != NULL){
+        affichePostfixe(arbre->sag);
+        affichePostfixe(arbre->sad);
+        printf("%d\t", arbre->n );
+    }
+}
 
 
 int main()
@@ -100,10 +117,14 @@ int main()
     ajouterNoued(&arbre, 121, "G");
 
     // Affichage
+    printf(" \n Pre-fixe\n");
+    affichePrefixe(arbre);
     printf(" \n Infixe \n");
     afficheInfixe(arbre);
+    printf(" \n Post-fixe\n");
+    affichePostfixe(arbre);
 
-    libereArbre(&arbre);
+    free(arbre);
 
     return 0;
 }
